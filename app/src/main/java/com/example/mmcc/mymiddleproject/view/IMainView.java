@@ -7,6 +7,6 @@ import android.graphics.Bitmap;
  */
 
 public interface IMainView {
-    void setText(String text);
-    void setImage(Bitmap bitmap);
+    void OnRequestSucceed(Object obj);
+    void OnRequestFailured(String err);
 }

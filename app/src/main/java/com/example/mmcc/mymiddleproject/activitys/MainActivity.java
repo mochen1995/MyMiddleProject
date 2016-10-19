@@ -11,25 +11,23 @@ import com.example.mmcc.mymiddleproject.view.IMainView;
 
 public class MainActivity extends BaseActivity implements IMainView{
 
-    private TextView tv;
+
+    private MainPresenter mainPresenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        MainPresenter mainPresenter = new MainPresenter(this);
-        mainPresenter.RequestData("www.sdffds.dsfdsf/dsfdsf");
-        tv = (TextView) findViewById(R.id.tv);
+        mainPresenter = new MainPresenter(this,this);
+        mainPresenter.RequestData("www.baidu.com");
+    }
+    @Override
+    public void OnRequestSucceed(Object obj) {
 
     }
 
     @Override
-    public void setText(String text) {
-        tv.setText(text);
-    }
-
-    @Override
-    public void setImage(Bitmap bitmap) {
+    public void OnRequestFailured(String err) {
 
     }
 }

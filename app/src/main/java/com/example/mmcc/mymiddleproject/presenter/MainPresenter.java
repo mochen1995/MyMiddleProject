@@ -1,11 +1,14 @@
 package com.example.mmcc.mymiddleproject.presenter;
 
+import android.content.Context;
 import android.os.Handler;
+import android.os.Looper;
 
 import com.example.mmcc.mymiddleproject.model.IMainModel;
 import com.example.mmcc.mymiddleproject.model.MainModelImpl;
 import com.example.mmcc.mymiddleproject.net.HttpUtils;
 import com.example.mmcc.mymiddleproject.view.IMainView;
+import com.google.gson.Gson;
 
 /**
  * Created by Administrator on 16-10-19.
@@ -14,24 +17,40 @@ import com.example.mmcc.mymiddleproject.view.IMainView;
 public class MainPresenter {
     private IMainView mainView;
     private IMainModel mainModel;
+    private Context mContext;
 
-    public MainPresenter(IMainView mainView){
+    private Handler handler;
+
+    public MainPresenter(Context context, IMainView mainView) {
         this.mainView = mainView;
         mainModel = new MainModelImpl();
+        mContext = context;
+        handler = new Handler(Looper.getMainLooper());
     }
 
-    public void RequestData(final String url){
-        new Handler().postDelayed(new Runnable() {
+    public void RequestData(final String url) {
+        HttpUtils.RequestDatas(mContext, url, new HttpUtils.OnHttpRequestListener() {
             @Override
-            public void run() {
-                String s = HttpUtils.RequestDatas(url);
-                mainModel.saveDatas(s); //model保存了数据
-                mainView.setText(s); //回调mainView的接口方法
+            public void succeed(String json) {
+                //数据解析
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                      mainView.OnRequestSucceed(null);
+                    }
+                });
             }
-        },2000);
+            @Override
+            public void failured(String err) {
+                mainView.OnRequestFailured(err);
+            }
+        });
+
+
 
     }
-    public String getDataFromLocal(){
+
+    public String getDataFromLocal() {
         return mainModel.getDatas();
     }
 }
