@@ -9,4 +9,8 @@ public class MyUrl {
     public static String getSelectUrl(int page){
         return String.format("http://api.fengniao.com/app_ipad/news_jingxuan.php?appImei=000000000000000&osType=Android&osVersion=4.1.1&page=%d",page);
     }
+    //精选的头部视图
+    public static String getSelectHeadUrl(){
+        return "http://api.fengniao.com/app_ipad/focus_pic.php?mid=19928?appImei=000000000000000&osType=Android&osVersion=4.1.1";
+    }
 }

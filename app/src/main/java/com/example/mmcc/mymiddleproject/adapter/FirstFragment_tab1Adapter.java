@@ -61,6 +61,17 @@ public class FirstFragment_tab1Adapter extends BaseAdapter {
         return position;
     }
 
+
+    @Override
+    public int getItemViewType(int position) {
+        return super.getItemViewType(position);
+    }
+
+    @Override
+    public int getViewTypeCount() {
+        return 2;
+    }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -78,7 +89,6 @@ public class FirstFragment_tab1Adapter extends BaseAdapter {
         holder.title.setText(selectionInfo.getTitle());
         holder.date.setText(selectionInfo.getDate());
         holder.author.setText(selectionInfo.getAuthor());
-        L.e("图片url = "+selectionInfo.getPic_url());
         Glide.with(context).
                 load(selectionInfo.getPic_url()).
                 crossFade().

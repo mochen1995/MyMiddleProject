@@ -27,7 +27,6 @@ public class FragmentPresenter {
         mContext = context;
         handler = new Handler(Looper.getMainLooper());
     }
-
     public void RequestData(final String url) {
         HttpUtils.RequestDatas(mContext, url, new HttpUtils.OnHttpRequestListener() {
             @Override
@@ -50,6 +49,30 @@ public class FragmentPresenter {
             }
         });
     }
+
+    public void RequestHeadData(final String url) {
+        HttpUtils.RequestDatas(mContext, url, new HttpUtils.OnHttpRequestListener() {
+            @Override
+            public void succeed(final String json) {
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        fragmentView.OnLoadListHead(json);
+                    }
+                });
+            }
+            @Override
+            public void failured(String err) {
+               // fragmentView.OnRequestFailured(err);
+            }
+
+            @Override
+            public void netFailured(String err) {
+               // fragmentView.netFailured(err);
+            }
+        });
+    }
+
 
     public String getDataFromLocal() {
         return mainModel.getDatas();
