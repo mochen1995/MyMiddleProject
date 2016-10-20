@@ -1,6 +1,7 @@
 package com.example.mmcc.mymiddleproject.activitys;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
@@ -36,16 +37,33 @@ public class MainActivity extends BaseActivity implements IMainView, RadioGroup.
     private MainPresenter mainPresenter;
     private FragmentManager fragmentManager;
 
+    private Fragment currentFragment;
+    private Fragment firstTabFragment,secondTabFragment,thridTabFragment,forthTabFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mainPresenter = new MainPresenter(this, this);
         rg.setOnCheckedChangeListener(this);
+        initFragment();
+    }
+
+    private void initFragment() {
         fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.add(R.id.activity_main_framelayout,new FirstTabFragment());
+         firstTabFragment = new FirstTabFragment();
+         secondTabFragment = new SecondTabFragment();
+         thridTabFragment = new ThridTabFragment();
+         forthTabFragment = new ForthTabFragment();
+        transaction.add(R.id.activity_main_framelayout,firstTabFragment);
+        transaction.add(R.id.activity_main_framelayout,secondTabFragment);
+        transaction.add(R.id.activity_main_framelayout,thridTabFragment);
+        transaction.add(R.id.activity_main_framelayout,forthTabFragment);
+        transaction.hide(secondTabFragment);
+        transaction.hide(thridTabFragment);
+        transaction.hide(forthTabFragment);
+        currentFragment = firstTabFragment;
         transaction.commit();
-
     }
 
     @Override
@@ -67,24 +85,31 @@ public class MainActivity extends BaseActivity implements IMainView, RadioGroup.
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         initRadioTextColor();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.hide(currentFragment);
         switch (checkedId) {
             case R.id.activity_main_rb1:
+
                 rb1.setTextColor(ContextCompat.getColor(this,R.color.tabTextColor_check));
-                transaction.replace(R.id.activity_main_framelayout,new FirstTabFragment());
+                transaction.show(firstTabFragment);
+                currentFragment = firstTabFragment;
                 break;
             case R.id.activity_main_rb2:
                 rb2.setTextColor(ContextCompat.getColor(this,R.color.tabTextColor_check));
-                transaction.replace(R.id.activity_main_framelayout,new SecondTabFragment());
-
+                //transaction.replace(R.id.activity_main_framelayout,new SecondTabFragment());
+                transaction.show(secondTabFragment);
+                currentFragment = secondTabFragment;
                 break;
             case R.id.activity_main_rb3:
                 rb3.setTextColor(ContextCompat.getColor(this,R.color.tabTextColor_check));
-                transaction.replace(R.id.activity_main_framelayout,new ThridTabFragment());
-
+               // transaction.replace(R.id.activity_main_framelayout,new ThridTabFragment());
+                transaction.show(thridTabFragment);
+                currentFragment = thridTabFragment;
                 break;
             case R.id.activity_main_rb4:
                 rb4.setTextColor(ContextCompat.getColor(this,R.color.tabTextColor_check));
-                transaction.replace(R.id.activity_main_framelayout,new ForthTabFragment());
+               // transaction.replace(R.id.activity_main_framelayout,new ForthTabFragment());
+                transaction.show(forthTabFragment);
+                currentFragment = forthTabFragment;
                 break;
         }
         transaction.commit();
