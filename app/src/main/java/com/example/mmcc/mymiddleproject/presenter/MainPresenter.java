@@ -44,6 +44,11 @@ public class MainPresenter {
             public void failured(String err) {
                 mainView.OnRequestFailured(err);
             }
+
+            @Override
+            public void netFailured(String err) {
+
+            }
         });
 
 

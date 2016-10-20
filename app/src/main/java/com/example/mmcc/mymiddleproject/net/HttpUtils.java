@@ -21,6 +21,7 @@ public class HttpUtils {
     public interface OnHttpRequestListener{
         void succeed(String json);
         void failured(String err);
+        void netFailured(String err);
     }
     private static OkHttpClient okHttpClient=null;
     //该方法只返回json数据
@@ -45,7 +46,7 @@ public class HttpUtils {
                 }
             });
         }else{
-            listener.failured("请您检查网络连接...");
+            listener.netFailured("请您检查网络连接...");
         }
 
     }

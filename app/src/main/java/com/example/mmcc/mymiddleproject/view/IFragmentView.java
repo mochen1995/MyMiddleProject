@@ -5,6 +5,7 @@ package com.example.mmcc.mymiddleproject.view;
  */
 
 public interface IFragmentView {
-    void OnRequestSucceed(Object obj);
+    void OnRequestSucceed(String json);
     void OnRequestFailured(String err);
+    void netFailured(String err);
 }

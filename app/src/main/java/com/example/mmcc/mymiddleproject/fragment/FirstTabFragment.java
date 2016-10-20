@@ -16,7 +16,10 @@ import android.widget.RadioGroup;
 import com.example.mmcc.mymiddleproject.R;
 import com.example.mmcc.mymiddleproject.adapter.MyFragmentPagerAdapter;
 import com.example.mmcc.mymiddleproject.fragment.tabfragment.*;
+import com.example.mmcc.mymiddleproject.presenter.FragmentPresenter;
+import com.example.mmcc.mymiddleproject.url.MyUrl;
 import com.example.mmcc.mymiddleproject.util.ScreenUtil;
+import com.example.mmcc.mymiddleproject.view.IFragmentView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +31,7 @@ import butterknife.ButterKnife;
  * Created by Administrator on 16-10-20.
  */
 
-public class FirstTabFragment extends Fragment implements ViewPager.OnPageChangeListener {
+public class FirstTabFragment extends BaseFragment implements ViewPager.OnPageChangeListener, RadioGroup.OnCheckedChangeListener {
 
     @Bind(R.id.scroll_title_bar_rb1)
     RadioButton rb1;
@@ -52,6 +55,8 @@ public class FirstTabFragment extends Fragment implements ViewPager.OnPageChange
 
 
     private List<Fragment> fragments;
+    private FragmentPresenter presenter;
+    private int currentPage=1;
 
     @Nullable
     @Override
@@ -59,6 +64,7 @@ public class FirstTabFragment extends Fragment implements ViewPager.OnPageChange
         mView = inflater.inflate(R.layout.fragment_tab1, container, false);
         ButterKnife.bind(this, mView);
         initView();
+
         return mView;
     }
 
@@ -73,6 +79,8 @@ public class FirstTabFragment extends Fragment implements ViewPager.OnPageChange
         MyFragmentPagerAdapter adapter = new MyFragmentPagerAdapter(getFragmentManager(), fragments);
         fragmentTab1Vp.setAdapter(adapter);
         fragmentTab1Vp.addOnPageChangeListener(this);
+
+        rg.setOnCheckedChangeListener(this);
     }
 
     private void initScrollbar() {
@@ -132,5 +140,24 @@ public class FirstTabFragment extends Fragment implements ViewPager.OnPageChange
     @Override
     public void onPageScrollStateChanged(int state) {
 
+    }
+
+    @Override
+    public void onCheckedChanged(RadioGroup group, int checkedId) {
+        switch (checkedId)
+        {
+            case R.id.scroll_title_bar_rb1:
+                fragmentTab1Vp.setCurrentItem(0,true);
+                break;
+            case R.id.scroll_title_bar_rb2:
+                fragmentTab1Vp.setCurrentItem(1,true);
+                break;
+            case R.id.scroll_title_bar_rb3:
+                fragmentTab1Vp.setCurrentItem(2,true);
+                break;
+            case R.id.scroll_title_bar_rb4:
+                fragmentTab1Vp.setCurrentItem(3,true);
+                break;
+        }
     }
 }

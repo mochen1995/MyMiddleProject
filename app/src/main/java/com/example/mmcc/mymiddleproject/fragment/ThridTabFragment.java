@@ -12,7 +12,7 @@ import android.widget.TextView;
  * Created by Administrator on 16-10-20.
  */
 
-public class ThridTabFragment extends Fragment{
+public class ThridTabFragment extends BaseFragment{
 
     @Nullable
     @Override

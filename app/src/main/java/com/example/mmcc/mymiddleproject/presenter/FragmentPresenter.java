@@ -31,12 +31,11 @@ public class FragmentPresenter {
     public void RequestData(final String url) {
         HttpUtils.RequestDatas(mContext, url, new HttpUtils.OnHttpRequestListener() {
             @Override
-            public void succeed(String json) {
-                //数据解析
+            public void succeed(final String json) {
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        fragmentView.OnRequestSucceed(null);
+                        fragmentView.OnRequestSucceed(json);
                     }
                 });
             }
@@ -44,10 +43,12 @@ public class FragmentPresenter {
             public void failured(String err) {
                 fragmentView.OnRequestFailured(err);
             }
+
+            @Override
+            public void netFailured(String err) {
+                fragmentView.netFailured(err);
+            }
         });
-
-
-
     }
 
     public String getDataFromLocal() {
