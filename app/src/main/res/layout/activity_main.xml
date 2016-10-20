@@ -1,18 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
     tools:context="com.example.mmcc.mymiddleproject.activitys.MainActivity">
 
-    <TextView
-        android:id="@+id/tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
-</RelativeLayout>
+    <FrameLayout
+        android:id="@+id/activity_main_framelayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+    </FrameLayout>
+
+    <RadioGroup
+        android:id="@+id/activity_main_rg"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#eee"
+        android:orientation="horizontal"
+        android:paddingTop="5dp"
+        >
+        <RadioButton
+            android:id="@+id/activity_main_rb1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:text="咨询"
+            android:checked="true"
+            android:gravity="center"
+            android:drawableTop="@drawable/first_tab_bg"
+            android:textColor="@color/tabTextColor_check"
+            />
+
+        <RadioButton
+            android:id="@+id/activity_main_rb2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:text="鉴赏"
+            android:textColor="@color/tabTextColor_normal"
+            android:gravity="center"
+            android:drawableTop="@drawable/second_tab_bg"
+             />
+        <RadioButton
+            android:id="@+id/activity_main_rb3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:text="论坛"
+            android:textColor="@color/tabTextColor_normal"
+            android:gravity="center"
+            android:drawableTop="@drawable/third_tab_bg"
+            />
+        <RadioButton
+            android:id="@+id/activity_main_rb4"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:text="设置"
+            android:textColor="@color/tabTextColor_normal"
+            android:gravity="center"
+            android:drawableTop="@drawable/forth_tab_bg"
+            />
+    </RadioGroup>
+
+</LinearLayout>

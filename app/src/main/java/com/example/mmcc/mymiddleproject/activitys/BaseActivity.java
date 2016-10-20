@@ -7,15 +7,21 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.example.mmcc.mymiddleproject.R;
 
+import butterknife.ButterKnife;
+
 /**
  * Created by Administrator on 16-10-19.
  */
 
-public class BaseActivity extends AppCompatActivity{
+public abstract class BaseActivity extends AppCompatActivity{
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(getLayoutId());
+        ButterKnife.bind(this);
     }
+
+    protected abstract int getLayoutId();
 
     @Override
     public void startActivity(Intent intent) {

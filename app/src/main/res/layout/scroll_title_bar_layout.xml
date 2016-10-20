@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="@color/colorPrimary"
+   >
+
+    <HorizontalScrollView
+        android:id="@+id/scroll_title_bar_scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RadioGroup
+            android:id="@+id/scroll_title_bar_rg"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/scroll_title_bar_rb1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:button="@null"
+                android:gravity="center"
+                android:text="精选"
+                android:textColor="@color/white"
+                />
+
+            <RadioButton
+                android:id="@+id/scroll_title_bar_rb2"
+                android:layout_width="wrap_content"
+                android:gravity="center"
+                android:layout_height="match_parent"
+                android:button="@null"
+                android:text="器材"
+                android:alpha="0.6"
+                android:textColor="@color/white"
+
+                />
+            <RadioButton
+                android:id="@+id/scroll_title_bar_rb3"
+                android:layout_width="wrap_content"
+                android:gravity="center"
+                android:layout_height="match_parent"
+                android:button="@null"
+                android:text="影响"
+                android:alpha="0.6"
+                android:textColor="@color/white"
+                />
+            <RadioButton
+                android:id="@+id/scroll_title_bar_rb4"
+                android:layout_width="wrap_content"
+                android:gravity="center"
+                android:layout_height="match_parent"
+                android:button="@null"
+                android:text="学院"
+                android:alpha="0.6"
+                android:textColor="@color/white"
+                />
+        </RadioGroup>
+        <View
+            android:id="@+id/scroll_title_bar_line"
+            android:layout_width="150dp"
+            android:layout_height="2dp"
+            android:background="#000" />
+    </LinearLayout>
+    </HorizontalScrollView>
+</RelativeLayout>

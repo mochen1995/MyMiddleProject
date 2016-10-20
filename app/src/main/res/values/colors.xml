@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimary">#ef3131</color>
+    <color name="colorPrimaryDark">#ef3131</color>
     <color name="colorAccent">#FF4081</color>
+
+    <!--底部tab字体颜色-->
+    <color name="tabTextColor_check">#F85959</color>
+    <color name="tabTextColor_normal">#575757</color>
+
+
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="gray">#808080</color>
+    <color name="red">#FF0000</color>
+    <color name="gold">#FFD700</color>
+    <color name="yellow">#FFFF00</color>
+    <color name="green">#008000</color>
+    <color name="blue">#0000FF</color>
+    <color name="purple">#800080</color>
+    <color name="pink">#FFC0CB</color>
+    <color name="orange">#FFA500</color>
+    <color name="lemonyellow">#FFFACD</color>
+    <color name="graywhite">#F5F5F5</color>
+    <color name="grayslate">#708090</color>
+    <color name="lightblue">#0083FF</color>
+    <color name="qqblue">#0CB8F6</color>
+    <color name="bgColor">#000000</color>
+    <color name="border_line">#ffd7dadc</color>
+    <color name="toppopupbg">#6a64e8</color>
+    <color name="endtaskBgColor">#dd4c4c</color>
 </resources>
