@@ -16,6 +16,7 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.example.mmcc.mymiddleproject.R;
+import com.example.mmcc.mymiddleproject.activitys.DetailActivity;
 import com.example.mmcc.mymiddleproject.adapter.FirstFragment_tab1Adapter;
 import com.example.mmcc.mymiddleproject.adapter.ListHeadAdapter;
 import com.example.mmcc.mymiddleproject.bean.ListHeadInfo;
@@ -39,7 +40,7 @@ import butterknife.ButterKnife;
  * Created by Administrator on 16-10-20.
  */
 
-public class FirstFragment_tab1 extends Fragment implements PullToRefreshBase.OnRefreshListener2, IFragmentView, ViewPager.OnPageChangeListener {
+public class FirstFragment_tab1 extends Fragment implements PullToRefreshBase.OnRefreshListener2, IFragmentView, ViewPager.OnPageChangeListener, FirstFragment_tab1Adapter.OnThirdLayoutClickListener {
 
     @Bind(R.id.fragment_tab1_selection_ptr)
     PullToRefreshListView ptr;
@@ -88,7 +89,9 @@ public class FirstFragment_tab1 extends Fragment implements PullToRefreshBase.On
         adapter = new FirstFragment_tab1Adapter(getContext());
         ptr.setEmptyView(mView.findViewById(R.id.list_empty_view));
         initHeadView();
+        adapter.setOnThirdLayoutClickListener(this);
         ptr.setAdapter(adapter);
+
     }
 
     private void initHeadView() {
@@ -99,10 +102,14 @@ public class FirstFragment_tab1 extends Fragment implements PullToRefreshBase.On
         RadioButton rb1 = (RadioButton) rg.getChildAt(0);
         rb1.setChecked(true);
         vp.addOnPageChangeListener(this);
-
-
         listHeadAdapter = new ListHeadAdapter(getContext());
         vp.setAdapter(listHeadAdapter);
+        headView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                L.e("当前点击对的页数为："+vp.getCurrentItem());
+            }
+        });
         //开启头部视图轮播
         new Thread(new Runnable() {
             @Override
@@ -196,5 +203,25 @@ public class FirstFragment_tab1 extends Fragment implements PullToRefreshBase.On
                 isDraging = false;
                 break;
         }
+    }
+
+    //list的item的不同点击事件
+    @Override
+    public void OnLeftLayoutClick(int position) {
+        Selection item = adapter.getItem(position);
+        DetailActivity.toDetailActivity(getContext(),item.getWeb_url());
+    }
+
+    @Override
+    public void OnRightLayoutClick(int position) {
+        //右边视图的数据是左边视图的next链
+        Selection item = adapter.getItem(position).getSelection();
+        DetailActivity.toDetailActivity(getContext(),item.getWeb_url());
+    }
+
+    @Override
+    public void OnCenterLayoutClick(int position) {
+        Selection item = adapter.getItem(position);
+        DetailActivity.toDetailActivity(getContext(),item.getWeb_url());
     }
 }

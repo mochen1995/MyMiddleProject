@@ -1,5 +1,6 @@
 package com.example.mmcc.mymiddleproject.net;
 
+import com.example.mmcc.mymiddleproject.bean.MaterialBean;
 import com.example.mmcc.mymiddleproject.bean.Selection;
 import com.example.mylibrary.L;
 import com.google.gson.Gson;
@@ -51,9 +52,7 @@ public class GsonUtil {
                 {
                     list.add(sele);
                 }
-                L.e(title);
             }
-
             JSONArray jsonArray = jsonObject.getJSONArray("160120");
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject item = jsonArray.getJSONObject(i);
@@ -69,6 +68,37 @@ public class GsonUtil {
             e.printStackTrace();
         }
 
+        return list;
+    }
+
+
+    public static List<MaterialBean> parsonCommonJson(String json){
+        List<MaterialBean> list = null;
+        JSONObject jsonObject = null;
+        try {
+            jsonObject = new JSONObject(json);
+            list = new ArrayList<>();
+            MaterialBean sele = null;
+            JSONArray jsonArray = jsonObject.getJSONArray("list");
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject item = jsonArray.getJSONObject(i);
+                String title = item.optString("title");
+                String pic_url = item.optString("pic_url");
+                String doc_url = item.optString("doc_url");
+                String web_url = item.optString("web_url");
+                sele = new MaterialBean(title,pic_url,doc_url,web_url);
+                if (i%2==1)// 第二个作为第一个的子链
+                {
+                    list.get(list.size()-1).setBean(sele);
+                }
+                else//将第一个加入列表
+                {
+                    list.add(sele);
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         return list;
     }
 }

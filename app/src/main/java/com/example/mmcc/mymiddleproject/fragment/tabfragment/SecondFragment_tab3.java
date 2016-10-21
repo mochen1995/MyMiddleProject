@@ -6,21 +6,21 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mmcc.mymiddleproject.R;
 import com.example.mmcc.mymiddleproject.activitys.DetailActivity;
+import com.example.mmcc.mymiddleproject.adapter.FirstFragment_tab1Adapter;
 import com.example.mmcc.mymiddleproject.adapter.FirstFragment_tab2Adapter;
 import com.example.mmcc.mymiddleproject.adapter.ListHeadAdapter;
 import com.example.mmcc.mymiddleproject.bean.ListHeadInfo;
 import com.example.mmcc.mymiddleproject.bean.MaterialBean;
+import com.example.mmcc.mymiddleproject.bean.Selection;
 import com.example.mmcc.mymiddleproject.net.GsonUtil;
 import com.example.mmcc.mymiddleproject.presenter.FragmentPresenter;
 import com.example.mmcc.mymiddleproject.url.MyUrl;
@@ -37,12 +37,10 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- * Created by Administrator on 16-10-20.
+ * Created by zhanglu on 2016/10/21.
  */
 
-public class FirstFragment_tab3 extends Fragment implements IFragmentView, ViewPager.OnPageChangeListener, PullToRefreshBase.OnRefreshListener2, FirstFragment_tab2Adapter.OnTwoLayoutClickListener {
-
-
+public class SecondFragment_tab3 extends Fragment implements IFragmentView, ViewPager.OnPageChangeListener, PullToRefreshBase.OnRefreshListener2, FirstFragment_tab2Adapter.OnTwoLayoutClickListener {
     @Bind(R.id.fragment_tab1_material_ptr)
     PullToRefreshListView ptr;
     private View mView;
@@ -87,7 +85,7 @@ public class FirstFragment_tab3 extends Fragment implements IFragmentView, ViewP
 
     public void loadData() {
         //请求数据
-        presenter.RequestData(MyUrl.getIconographyUrl(currentPage));
+        presenter.RequestData(MyUrl.getZoologyUrl(currentPage));
     }
 
     @Override
@@ -107,57 +105,21 @@ public class FirstFragment_tab3 extends Fragment implements IFragmentView, ViewP
             presenter = new FragmentPresenter(getContext(), this);
             ButterKnife.bind(this, mView);
             initView();
-            //请求头部视图数据
-            presenter.RequestHeadData(MyUrl.getIconographyHeadUrl());
+//            //请求头部视图数据
+//            presenter.RequestHeadData(MyUrl.getMaterialHeadUrl());
         }
         return mView;
     }
+
     private void initView() {
         ptr.setOnRefreshListener(this);
         adapter = new FirstFragment_tab2Adapter(getContext());
         ptr.setEmptyView(mView.findViewById(R.id.list_empty_view));
-        initHeadView();
         adapter.setOnTwoLayoutClickListener(this);
         ptr.setAdapter(adapter);
 
-
-
     }
 
-    private void initHeadView() {
-        View headView = LayoutInflater.from(getContext()).inflate(R.layout.list_head, null);
-        ptr.getRefreshableView().addHeaderView(headView);
-        vp = (ViewPager) headView.findViewById(R.id.list_head_vp);
-        rg = (RadioGroup) headView.findViewById(R.id.list_head_rg);
-        RadioButton rb1 = (RadioButton) rg.getChildAt(0);
-        rb1.setChecked(true);
-        vp.addOnPageChangeListener(this);
-        listHeadAdapter = new ListHeadAdapter(getContext());
-        vp.setAdapter(listHeadAdapter);
-        headView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                L.e("当前点击对的页数为："+vp.getCurrentItem());
-            }
-        });
-        //开启头部视图轮播
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (true) {
-
-                    try {
-                        TimeUnit.SECONDS.sleep(2);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    if (!isDraging) {
-                        handler.sendEmptyMessage(0x10);
-                    }
-                }
-            }
-        }).start();
-    }
 
     @Override
     public void onDestroyView() {
@@ -169,14 +131,14 @@ public class FirstFragment_tab3 extends Fragment implements IFragmentView, ViewP
     @Override
     public void onPullDownToRefresh(PullToRefreshBase refreshView) {
         currentPage = 1;
-        presenter.RequestData(MyUrl.getIconographyUrl(currentPage));
+        presenter.RequestData(MyUrl.getZoologyUrl(currentPage));
     }
 
     //上拉加载
     @Override
     public void onPullUpToRefresh(PullToRefreshBase refreshView) {
         currentPage++;
-        presenter.RequestData(MyUrl.getIconographyUrl(currentPage));
+        presenter.RequestData(MyUrl.getZoologyUrl(currentPage));
     }
 
     @Override
@@ -195,7 +157,7 @@ public class FirstFragment_tab3 extends Fragment implements IFragmentView, ViewP
     @Override
     public void OnRequestFailured(String err) {
         L.e(err);
-        Toast.makeText(getContext(),err,Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), err, Toast.LENGTH_SHORT).show();
         /*if (ptr != null)
             ptr.onRefreshComplete();*/
     }
@@ -209,10 +171,10 @@ public class FirstFragment_tab3 extends Fragment implements IFragmentView, ViewP
 
     @Override
     public void OnLoadListHead(String json) {
-        TypeToken<List<ListHeadInfo>> type = new TypeToken<List<ListHeadInfo>>() {
-        };
-        List<ListHeadInfo> list = GsonUtil.jsonToList(json, type.getType());
-        listHeadAdapter.addData(list);
+//        TypeToken<List<ListHeadInfo>> type = new TypeToken<List<ListHeadInfo>>() {
+//        };
+//        List<ListHeadInfo> list = GsonUtil.jsonToList(json, type.getType());
+//        listHeadAdapter.addData(list);
     }
 
     @Override
@@ -240,11 +202,11 @@ public class FirstFragment_tab3 extends Fragment implements IFragmentView, ViewP
 
     @Override
     public void OnLeftClick(String webUrl) {
-        DetailActivity.toDetailActivity(getContext(),webUrl);
+        DetailActivity.toDetailActivity(getContext(), webUrl);
     }
 
     @Override
     public void OnRightClick(String webUrl) {
-        DetailActivity.toDetailActivity(getContext(),webUrl);
+        DetailActivity.toDetailActivity(getContext(), webUrl);
     }
 }

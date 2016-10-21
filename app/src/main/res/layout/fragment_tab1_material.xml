@@ -7,7 +7,7 @@
     >
 
     <com.handmark.pulltorefresh.library.PullToRefreshListView
-        android:id="@+id/fragment_tab1_selection_ptr"
+        android:id="@+id/fragment_tab1_material_ptr"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:cacheColorHint="#00000000"

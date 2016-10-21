@@ -1,6 +1,7 @@
 package com.example.mmcc.mymiddleproject.adapter;
 
 import android.content.Context;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,11 +26,19 @@ import butterknife.ButterKnife;
 
 public class FirstFragment_tab1Adapter extends BaseAdapter {
 
-    public interface OnTwoLayoutClickListener{
+    public interface OnThirdLayoutClickListener {
         void OnLeftLayoutClick(int position);
+
         void OnRightLayoutClick(int position);
+
+        void OnCenterLayoutClick(int position);
     }
 
+    private OnThirdLayoutClickListener listener;
+
+    public void setOnThirdLayoutClickListener(OnThirdLayoutClickListener listener) {
+        this.listener = listener;
+    }
 
     private List<Selection> datas;
     private LayoutInflater inflater;
@@ -81,7 +90,7 @@ public class FirstFragment_tab1Adapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         int type = getItemViewType(position);
         Selection selectionInfo = datas.get(position);
 
@@ -119,16 +128,28 @@ public class FirstFragment_tab1Adapter extends BaseAdapter {
                 Glide.with(context).load(selectionInfo.getPic_url())
                         .centerCrop().placeholder(R.mipmap.big_loadpic_full_listpage)
                         .into(holder_2.img1);
-
-                if(selection2!=null)
-                {
+                holder_2.leftCard.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (listener != null) {
+                            listener.OnLeftLayoutClick(position);
+                        }
+                    }
+                });
+                if (selection2 != null) {
                     holder_2.text2.setText(selection2.getTitle());
                     Glide.with(context).load(selection2.getPic_url())
                             .centerCrop().placeholder(R.mipmap.big_loadpic_full_listpage)
                             .into(holder_2.img2);
+                    holder_2.rightCard.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if (listener != null) {
+                                listener.OnRightLayoutClick(position);
+                            }
+                        }
+                    });
                 }
-
-
                 break;
             case 1:
                 holder.title.setText(selectionInfo.getTitle());
@@ -140,6 +161,14 @@ public class FirstFragment_tab1Adapter extends BaseAdapter {
                         centerCrop().
                         placeholder(R.mipmap.big_loadpic_full_listpage).
                         into(holder.img);
+                holder.cardView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (listener!=null) {
+                            listener.OnCenterLayoutClick(position);
+                        }
+                    }
+                });
                 break;
         }
 
@@ -156,6 +185,8 @@ public class FirstFragment_tab1Adapter extends BaseAdapter {
         TextView author;
         @Bind(R.id.fragment_tab1_lvitem_img)
         ImageView img;
+        @Bind(R.id.fragment_tab1_lvitem_centerCard)
+        LinearLayout cardView;
 
         Tab1Holder(View view) {
             ButterKnife.bind(this, view);
@@ -171,6 +202,10 @@ public class FirstFragment_tab1Adapter extends BaseAdapter {
         ImageView img2;
         @Bind(R.id.lvitem2_text2)
         TextView text2;
+        @Bind(R.id.lvitem2_leftcard)
+        CardView leftCard;
+        @Bind(R.id.lvitem2_rightcard)
+        CardView rightCard;
 
         Tab1Holder_2(View view) {
             ButterKnife.bind(this, view);

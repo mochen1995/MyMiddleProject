@@ -1,10 +1,10 @@
 [
     {
-        "merged": "D:\\androidProject\\MyMiddleProject\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\pull_to_refresh_header_vertical.xml",
-        "source": "D:\\androidProject\\MyMiddleProject\\library\\build\\intermediates\\bundles\\debug\\res\\layout\\pull_to_refresh_header_vertical.xml"
+        "merged": "F:\\as\\android_project\\MyMiddleProject\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\pull_to_refresh_header_horizontal.xml",
+        "source": "F:\\as\\android_project\\MyMiddleProject\\library\\build\\intermediates\\bundles\\debug\\res\\layout\\pull_to_refresh_header_horizontal.xml"
     },
     {
-        "merged": "D:\\androidProject\\MyMiddleProject\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\pull_to_refresh_header_horizontal.xml",
-        "source": "D:\\androidProject\\MyMiddleProject\\library\\build\\intermediates\\bundles\\debug\\res\\layout\\pull_to_refresh_header_horizontal.xml"
+        "merged": "F:\\as\\android_project\\MyMiddleProject\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\pull_to_refresh_header_vertical.xml",
+        "source": "F:\\as\\android_project\\MyMiddleProject\\library\\build\\intermediates\\bundles\\debug\\res\\layout\\pull_to_refresh_header_vertical.xml"
     }
 ]

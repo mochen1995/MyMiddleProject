@@ -1,10 +1,10 @@
 [
     {
-        "merged": "D:\\androidProject\\MyMiddleProject\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\indicator_bg_top.xml",
-        "source": "D:\\androidProject\\MyMiddleProject\\library\\build\\intermediates\\bundles\\debug\\res\\drawable\\indicator_bg_top.xml"
+        "merged": "F:\\as\\android_project\\MyMiddleProject\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\indicator_bg_bottom.xml",
+        "source": "F:\\as\\android_project\\MyMiddleProject\\library\\build\\intermediates\\bundles\\debug\\res\\drawable\\indicator_bg_bottom.xml"
     },
     {
-        "merged": "D:\\androidProject\\MyMiddleProject\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\indicator_bg_bottom.xml",
-        "source": "D:\\androidProject\\MyMiddleProject\\library\\build\\intermediates\\bundles\\debug\\res\\drawable\\indicator_bg_bottom.xml"
+        "merged": "F:\\as\\android_project\\MyMiddleProject\\library\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\indicator_bg_top.xml",
+        "source": "F:\\as\\android_project\\MyMiddleProject\\library\\build\\intermediates\\bundles\\debug\\res\\drawable\\indicator_bg_top.xml"
     }
 ]
