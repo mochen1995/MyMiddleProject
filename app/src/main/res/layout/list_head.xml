@@ -24,6 +24,7 @@
             android:layout_height="wrap_content"
             android:button="@null"
             android:background="@drawable/radiobtn_star_select"
+            android:clickable="false"
             />
 
         <RadioButton
@@ -31,12 +32,14 @@
             android:layout_height="wrap_content"
             android:button="@null"
             android:background="@drawable/radiobtn_star_select"
+            android:clickable="false"
             />
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:button="@null"
             android:background="@drawable/radiobtn_star_select"
+            android:clickable="false"
             />
     </RadioGroup>
 </RelativeLayout>

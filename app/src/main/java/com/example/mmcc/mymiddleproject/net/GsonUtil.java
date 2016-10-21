@@ -1,6 +1,7 @@
 package com.example.mmcc.mymiddleproject.net;
 
 import com.example.mmcc.mymiddleproject.bean.Selection;
+import com.example.mylibrary.L;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -42,8 +43,17 @@ public class GsonUtil {
                 String author = item.optString("author");
                 String web_url = item.optString("web_url");
                 sele = new Selection(title,pic_url,date,author,web_url);
-                list.add(sele);
+                if (i==1)// 第二个作为第一个的子链
+                {
+                    list.get(0).setSelection(sele);
+                }
+                else  //将第一个加入列表
+                {
+                    list.add(sele);
+                }
+                L.e(title);
             }
+
             JSONArray jsonArray = jsonObject.getJSONArray("160120");
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject item = jsonArray.getJSONObject(i);

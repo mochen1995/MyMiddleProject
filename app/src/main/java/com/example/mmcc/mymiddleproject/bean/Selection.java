@@ -14,6 +14,7 @@ public class Selection {
         this.web_url = web_url;
     }
 
+
     @Override
     public String toString() {
         return "Selection{" +
@@ -26,6 +27,16 @@ public class Selection {
     }
 
     public Selection() {
+    }
+
+    private Selection selection;
+
+    public Selection getSelection() {
+        return selection;
+    }
+
+    public void setSelection(Selection selection) {
+        this.selection = selection;
     }
 
     /**

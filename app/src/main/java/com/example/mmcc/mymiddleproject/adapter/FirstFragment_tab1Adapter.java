@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.mmcc.mymiddleproject.R;
 import com.example.mmcc.mymiddleproject.bean.Selection;
-import com.example.mylibrary.L;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +24,12 @@ import butterknife.ButterKnife;
  */
 
 public class FirstFragment_tab1Adapter extends BaseAdapter {
+
+    public interface OnTwoLayoutClickListener{
+        void OnLeftLayoutClick(int position);
+        void OnRightLayoutClick(int position);
+    }
+
 
     private List<Selection> datas;
     private LayoutInflater inflater;
@@ -64,7 +69,10 @@ public class FirstFragment_tab1Adapter extends BaseAdapter {
 
     @Override
     public int getItemViewType(int position) {
-        return super.getItemViewType(position);
+        if (position % 5 == 0) {
+            return 0;
+        }
+        return 1;
     }
 
     @Override
@@ -74,27 +82,68 @@ public class FirstFragment_tab1Adapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
+        int type = getItemViewType(position);
         Selection selectionInfo = datas.get(position);
+
         Tab1Holder holder = null;
-        if(convertView==null)
-        {
-            convertView = inflater.inflate(R.layout.fragment_tab1_lvitem, null);
-            holder = new Tab1Holder(convertView);
-            convertView.setTag(holder);
-        }else{
-            holder = (Tab1Holder) convertView.getTag();
+        Tab1Holder_2 holder_2 = null;
+        if (convertView == null) {
+            switch (type) {
+                case 0: //双布局
+                    convertView = inflater.inflate(R.layout.fragment_tab1_lvitem_2, null);
+                    holder_2 = new Tab1Holder_2(convertView);
+                    convertView.setTag(holder_2);
+                    break;
+                case 1:
+                    //list列表布局
+                    convertView = inflater.inflate(R.layout.fragment_tab1_lvitem, null);
+                    holder = new Tab1Holder(convertView);
+                    convertView.setTag(holder);
+                    break;
+            }
+        } else {
+            switch (type) {
+                case 0:
+                    holder_2 = (Tab1Holder_2) convertView.getTag();
+                    break;
+                case 1:
+                    holder = (Tab1Holder) convertView.getTag();
+                    break;
+            }
         }
 
-        holder.title.setText(selectionInfo.getTitle());
-        holder.date.setText(selectionInfo.getDate());
-        holder.author.setText(selectionInfo.getAuthor());
-        Glide.with(context).
-                load(selectionInfo.getPic_url()).
-                crossFade().
-                centerCrop().
-                placeholder(R.mipmap.big_loadpic_full_listpage).
-                into(holder.img);
+        switch (type) {
+            case 0:
+                Selection selection2 = selectionInfo.getSelection();
+                holder_2.text1.setText(selectionInfo.getTitle());
+                Glide.with(context).load(selectionInfo.getPic_url())
+                        .centerCrop().placeholder(R.mipmap.big_loadpic_full_listpage)
+                        .into(holder_2.img1);
+
+                if(selection2!=null)
+                {
+                    holder_2.text2.setText(selection2.getTitle());
+                    Glide.with(context).load(selection2.getPic_url())
+                            .centerCrop().placeholder(R.mipmap.big_loadpic_full_listpage)
+                            .into(holder_2.img2);
+                }
+
+
+                break;
+            case 1:
+                holder.title.setText(selectionInfo.getTitle());
+                holder.date.setText(selectionInfo.getDate());
+                holder.author.setText(selectionInfo.getAuthor());
+                Glide.with(context).
+                        load(selectionInfo.getPic_url()).
+                        crossFade().
+                        centerCrop().
+                        placeholder(R.mipmap.big_loadpic_full_listpage).
+                        into(holder.img);
+                break;
+        }
+
+
         return convertView;
     }
 
@@ -107,8 +156,26 @@ public class FirstFragment_tab1Adapter extends BaseAdapter {
         TextView author;
         @Bind(R.id.fragment_tab1_lvitem_img)
         ImageView img;
+
         Tab1Holder(View view) {
             ButterKnife.bind(this, view);
         }
     }
+
+    static class Tab1Holder_2 {
+        @Bind(R.id.lvitem2_img1)
+        ImageView img1;
+        @Bind(R.id.lvitem2_text1)
+        TextView text1;
+        @Bind(R.id.lvitem2_img2)
+        ImageView img2;
+        @Bind(R.id.lvitem2_text2)
+        TextView text2;
+
+        Tab1Holder_2(View view) {
+            ButterKnife.bind(this, view);
+        }
+    }
+
+
 }

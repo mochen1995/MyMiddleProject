@@ -18,7 +18,7 @@
         android:id="@+id/activity_main_rg"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#eee"
+        android:background="#eeeeef"
         android:orientation="horizontal"
         android:paddingTop="5dp"
         >

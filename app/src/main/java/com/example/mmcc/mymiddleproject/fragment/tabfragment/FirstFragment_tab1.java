@@ -1,6 +1,8 @@
 package com.example.mmcc.mymiddleproject.fragment.tabfragment;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
@@ -28,6 +30,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -42,10 +45,28 @@ public class FirstFragment_tab1 extends Fragment implements PullToRefreshBase.On
     PullToRefreshListView ptr;
     private View mView;
     private FragmentPresenter presenter;
-    private int currentPage = 1;
+    private int currentPage = 1; //数据加载的页数
     private FirstFragment_tab1Adapter adapter;
     private ListHeadAdapter listHeadAdapter;
     private RadioGroup rg;
+    private ViewPager vp;
+
+    private int currentHeadPos; //当前头部视图的位置
+    private boolean isDraging; //当前是否在拖动头部视图，停止自动轮播
+
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 0x10:
+                    //轮播头部视图
+                    currentHeadPos++;
+                    vp.setCurrentItem(currentHeadPos % 3, true);
+                    break;
+            }
+        }
+    };
+
 
     @Nullable
     @Override
@@ -53,6 +74,7 @@ public class FirstFragment_tab1 extends Fragment implements PullToRefreshBase.On
         mView = inflater.inflate(R.layout.fragment_tab1_selection, container, false);
         ButterKnife.bind(this, mView);
         presenter = new FragmentPresenter(getContext(), this);
+
         //请求数据
         presenter.RequestData(MyUrl.getSelectUrl(currentPage));
         //请求头部视图数据
@@ -72,7 +94,7 @@ public class FirstFragment_tab1 extends Fragment implements PullToRefreshBase.On
     private void initHeadView() {
         View headView = LayoutInflater.from(getContext()).inflate(R.layout.list_head, null);
         ptr.getRefreshableView().addHeaderView(headView);
-        ViewPager vp = (ViewPager) headView.findViewById(R.id.list_head_vp);
+        vp = (ViewPager) headView.findViewById(R.id.list_head_vp);
         rg = (RadioGroup) headView.findViewById(R.id.list_head_rg);
         RadioButton rb1 = (RadioButton) rg.getChildAt(0);
         rb1.setChecked(true);
@@ -81,7 +103,24 @@ public class FirstFragment_tab1 extends Fragment implements PullToRefreshBase.On
 
         listHeadAdapter = new ListHeadAdapter(getContext());
         vp.setAdapter(listHeadAdapter);
+        //开启头部视图轮播
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
 
+                        try {
+                            TimeUnit.SECONDS.sleep(2);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
+                    if (!isDraging) {
+                        handler.sendEmptyMessage(0x10);
+                    }
+                }
+            }
+        }).start();
     }
 
     @Override
@@ -106,49 +145,56 @@ public class FirstFragment_tab1 extends Fragment implements PullToRefreshBase.On
 
     @Override
     public void OnRequestSucceed(String json) {
-        if(currentPage==1) //说明请求的第一页数据
+        if (currentPage == 1) //说明请求的第一页数据
             adapter.clearDatas();
         List<Selection> list = GsonUtil.parsonJson(json);
-        L.e(list.toString());
         adapter.addDatas(list);
-        if (ptr!=null)
-        ptr.onRefreshComplete();
+        if (ptr != null)
+            ptr.onRefreshComplete();
     }
 
     @Override
     public void OnRequestFailured(String err) {
         L.e(err);
-        if (ptr!=null)
-        ptr.onRefreshComplete();
+        if (ptr != null)
+            ptr.onRefreshComplete();
     }
 
     @Override
     public void netFailured(String err) {
         Toast.makeText(getContext(), err, Toast.LENGTH_SHORT).show();
-        if (ptr!=null)
-        ptr.onRefreshComplete();
+        if (ptr != null)
+            ptr.onRefreshComplete();
     }
 
     @Override
     public void OnLoadListHead(String json) {
-        TypeToken<List<ListHeadInfo>> type = new TypeToken<List<ListHeadInfo>>(){};
+        TypeToken<List<ListHeadInfo>> type = new TypeToken<List<ListHeadInfo>>() {
+        };
         List<ListHeadInfo> list = GsonUtil.jsonToList(json, type.getType());
         listHeadAdapter.addData(list);
     }
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
     }
 
     @Override
     public void onPageSelected(int position) {
+        currentHeadPos = position;
         RadioButton rb = (RadioButton) rg.getChildAt(position);
         rb.setChecked(true);
     }
 
     @Override
     public void onPageScrollStateChanged(int state) {
-
+        switch (state) {
+            case ViewPager.SCROLL_STATE_DRAGGING:
+                isDraging = true;
+                break;
+            case ViewPager.SCROLL_STATE_IDLE:
+                isDraging = false;
+                break;
+        }
     }
 }
