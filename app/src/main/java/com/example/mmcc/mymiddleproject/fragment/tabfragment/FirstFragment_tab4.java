@@ -132,13 +132,14 @@ public class FirstFragment_tab4 extends Fragment implements IFragmentView, ViewP
         rb1.setChecked(true);
         vp.addOnPageChangeListener(this);
         listHeadAdapter = new ListHeadAdapter(getContext());
-        vp.setAdapter(listHeadAdapter);
-        headView.setOnClickListener(new View.OnClickListener() {
+        listHeadAdapter.setOnHeadViewClickListener(new ListHeadAdapter.OnHeadViewClickListener() {
             @Override
-            public void onClick(View v) {
-                L.e("当前点击对的页数为："+vp.getCurrentItem());
+            public void OnClick() {
+                ListHeadInfo item = listHeadAdapter.getItem(vp.getCurrentItem());
+                DetailActivity.toDetailActivity(getContext(),item.getUrl());
             }
         });
+        vp.setAdapter(listHeadAdapter);
         //开启头部视图轮播
         new Thread(new Runnable() {
             @Override

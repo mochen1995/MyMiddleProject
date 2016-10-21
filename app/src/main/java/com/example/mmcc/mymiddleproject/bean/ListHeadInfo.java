@@ -27,6 +27,15 @@ public class ListHeadInfo {
     private String web_url;
     private String doc_id;
     private String author;
+    /**
+     * type : doc
+     * url : http://api.fengniao.com/app_ipad/news_iphone_doc_v1.php?docid=5331536
+     * comment_page_num : 0
+     * comments_num : 0
+     * more_comment_url : http://api.fengniao.com/app_ipad/news_doc_comments.php?docid=5331536&isPad=1
+     */
+
+    private String url;
 
     @Override
     public String toString() {
@@ -86,5 +95,13 @@ public class ListHeadInfo {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

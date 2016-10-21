@@ -15,9 +15,11 @@ import android.widget.Toast;
 
 import com.example.mmcc.mymiddleproject.R;
 import com.example.mmcc.mymiddleproject.activitys.DetailActivity;
+import com.example.mmcc.mymiddleproject.activitys.ImageDetailActivity;
 import com.example.mmcc.mymiddleproject.adapter.FirstFragment_tab1Adapter;
 import com.example.mmcc.mymiddleproject.adapter.FirstFragment_tab2Adapter;
 import com.example.mmcc.mymiddleproject.adapter.ListHeadAdapter;
+import com.example.mmcc.mymiddleproject.adapter.SecondFragment_tab1Adapter;
 import com.example.mmcc.mymiddleproject.bean.ListHeadInfo;
 import com.example.mmcc.mymiddleproject.bean.MaterialBean;
 import com.example.mmcc.mymiddleproject.bean.Selection;
@@ -40,7 +42,7 @@ import butterknife.ButterKnife;
  * Created by zhanglu on 2016/10/21.
  */
 
-public class SecondFragment_tab1 extends Fragment implements IFragmentView, ViewPager.OnPageChangeListener, PullToRefreshBase.OnRefreshListener2, FirstFragment_tab2Adapter.OnTwoLayoutClickListener  {
+public class SecondFragment_tab1 extends Fragment implements IFragmentView, ViewPager.OnPageChangeListener, PullToRefreshBase.OnRefreshListener2, SecondFragment_tab1Adapter.OnTwoLayoutClickListener  {
 
     @Bind(R.id.fragment_tab1_material_ptr)
     PullToRefreshListView ptr;
@@ -48,7 +50,7 @@ public class SecondFragment_tab1 extends Fragment implements IFragmentView, View
     private FragmentPresenter presenter;
     private int currentPage = 1; //数据加载的页数
     private ListHeadAdapter listHeadAdapter;
-    private FirstFragment_tab2Adapter adapter;
+    private SecondFragment_tab1Adapter adapter;
     private RadioGroup rg;
     private ViewPager vp;
 
@@ -111,12 +113,10 @@ public class SecondFragment_tab1 extends Fragment implements IFragmentView, View
     }
     private void initView() {
         ptr.setOnRefreshListener(this);
-        adapter = new FirstFragment_tab2Adapter(getContext());
+        adapter = new SecondFragment_tab1Adapter(getContext());
         ptr.setEmptyView(mView.findViewById(R.id.list_empty_view));
         adapter.setOnTwoLayoutClickListener(this);
         ptr.setAdapter(adapter);
-
-
 
     }
 
@@ -199,11 +199,11 @@ public class SecondFragment_tab1 extends Fragment implements IFragmentView, View
 
     @Override
     public void OnLeftClick(String webUrl) {
-        DetailActivity.toDetailActivity(getContext(),webUrl);
+        ImageDetailActivity.toImageDetailActivity(getContext(),webUrl);
     }
 
     @Override
     public void OnRightClick(String webUrl) {
-        DetailActivity.toDetailActivity(getContext(),webUrl);
+        ImageDetailActivity.toImageDetailActivity(getContext(),webUrl);
     }
 }

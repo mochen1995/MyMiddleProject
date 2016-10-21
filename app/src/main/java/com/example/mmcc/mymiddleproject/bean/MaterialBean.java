@@ -1,7 +1,5 @@
 package com.example.mmcc.mymiddleproject.bean;
 
-import java.util.List;
-
 /**
  * Created by zhanglu on 2016/10/21.
  */
@@ -17,13 +15,23 @@ public class MaterialBean {
     private String web_url;
     private MaterialBean bean;
 
+
+    /**
+     * 图赏需要的数据
+     * date : 1476763761
+     * detail_url : http://api.fengniao.com/app_ipad/pic_bbs_detail.php?id=9350426&fid=101
+     */
+    private String detail_url;
+
+
     @Override
     public String toString() {
         return "MaterialBean{" +
                 "title='" + title + '\'' +
                 ", pic_url='" + pic_url + '\'' +
                 ", doc_url='" + doc_url + '\'' +
-                ", web_url='" + web_url +
+                ", web_url='" + web_url + '\''+
+                ", detail_url'"+detail_url+
                 '}';
     }
 
@@ -35,11 +43,12 @@ public class MaterialBean {
         this.bean = bean;
     }
 
-    public MaterialBean(String title, String pic_url, String doc_url, String web_url) {
+    public MaterialBean(String title, String pic_url, String doc_url, String web_url,String detail_url) {
         this.title = title;
         this.pic_url = pic_url;
         this.doc_url = doc_url;
         this.web_url = web_url;
+        this.detail_url = detail_url;
     }
 
     public String getTitle() {
@@ -72,5 +81,13 @@ public class MaterialBean {
 
     public void setWeb_url(String web_url) {
         this.web_url = web_url;
+    }
+
+    public String getDetail_url() {
+        return detail_url;
+    }
+
+    public void setDetail_url(String detail_url) {
+        this.detail_url = detail_url;
     }
 }

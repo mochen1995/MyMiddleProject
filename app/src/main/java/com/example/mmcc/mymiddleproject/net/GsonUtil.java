@@ -86,7 +86,8 @@ public class GsonUtil {
                 String pic_url = item.optString("pic_url");
                 String doc_url = item.optString("doc_url");
                 String web_url = item.optString("web_url");
-                sele = new MaterialBean(title,pic_url,doc_url,web_url);
+                String detail_url = item.optString("detail_url");
+                sele = new MaterialBean(title,pic_url,doc_url,web_url,detail_url);
                 if (i%2==1)// 第二个作为第一个的子链
                 {
                     list.get(list.size()-1).setBean(sele);

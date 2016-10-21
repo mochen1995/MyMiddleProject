@@ -21,6 +21,15 @@ import java.util.List;
 
 public class ListHeadAdapter extends PagerAdapter {
 
+    public interface OnHeadViewClickListener{
+        void OnClick();
+    }
+    private OnHeadViewClickListener listener;
+
+    public void setOnHeadViewClickListener(OnHeadViewClickListener listener) {
+        this.listener = listener;
+    }
+
     private List<ListHeadInfo> datas;
 
     private LayoutInflater inflater;
@@ -30,6 +39,10 @@ public class ListHeadAdapter extends PagerAdapter {
         datas = new ArrayList<>();
         this.context = context;
         inflater = LayoutInflater.from(context);
+    }
+
+    public ListHeadInfo getItem(int position){
+        return datas.get(position);
     }
 
     public void addData(List<ListHeadInfo> datas) {
@@ -57,6 +70,14 @@ public class ListHeadAdapter extends PagerAdapter {
         View view = inflater.inflate(R.layout.list_head_item, null);
 
         ImageView img = (ImageView) view.findViewById(R.id.list_head_item_img);
+        img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listener!=null) {
+                    listener.OnClick();
+                }
+            }
+        });
         TextView text = (TextView) view.findViewById(R.id.list_head_item_text);
         text.setText(datas.get(position).getTitle());
         Glide.with(context)
