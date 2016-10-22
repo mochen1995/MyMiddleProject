@@ -144,10 +144,7 @@ public class SecondFragment_tab1 extends Fragment implements IFragmentView, View
     public void OnRequestSucceed(String json) {
         if (currentPage == 1) //说明请求的第一页数据
             adapter.clearDatas();
-
-        L.e(json);
         List<MaterialBean> list = GsonUtil.parsonCommonJson(json);
-        L.e(list.toString());
         adapter.addDatas(list);
         if (ptr != null)
             ptr.onRefreshComplete();

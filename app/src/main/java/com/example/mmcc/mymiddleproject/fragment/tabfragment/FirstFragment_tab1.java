@@ -55,6 +55,8 @@ public class FirstFragment_tab1 extends Fragment implements PullToRefreshBase.On
     private int currentHeadPos; //当前头部视图的位置
     private boolean isDraging; //当前是否在拖动头部视图，停止自动轮播
 
+    private boolean isDestory = false;
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -117,14 +119,16 @@ public class FirstFragment_tab1 extends Fragment implements PullToRefreshBase.On
             public void run() {
                 while (true) {
 
+                    if (!isDestory)
+                    {
                         try {
                             TimeUnit.SECONDS.sleep(2);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
-
-                    if (!isDraging) {
-                        handler.sendEmptyMessage(0x10);
+                        if (!isDraging) {
+                            handler.sendEmptyMessage(0x10);
+                        }
                     }
                 }
             }
@@ -224,5 +228,11 @@ public class FirstFragment_tab1 extends Fragment implements PullToRefreshBase.On
     public void OnCenterLayoutClick(int position) {
         Selection item = adapter.getItem(position);
         DetailActivity.toDetailActivity(getContext(),item.getWeb_url());
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        isDestory = true;
     }
 }

@@ -1,5 +1,9 @@
 package com.example.mmcc.mymiddleproject.bean;
 
+import android.widget.ImageView;
+
+import java.util.List;
+
 /**
  * Created by zhanglu on 2016/10/21.
  */
@@ -97,6 +101,45 @@ public class ImageEnjoy {
 
         public void setWeb_url(String web_url) {
             this.web_url = web_url;
+        }
+    }
+
+    public static class ImageDetailBean{
+        private String title;
+        private String page;
+        List<String> imgs;
+
+        @Override
+        public String toString() {
+            return "ImageDetailBean{" +
+                    "title='" + title + '\'' +
+                    ", page='" + page + '\'' +
+                    ", imgs=" + imgs +
+                    '}';
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public void setTitle(String title) {
+            this.title = title;
+        }
+
+        public String getPage() {
+            return page;
+        }
+
+        public void setPage(String page) {
+            this.page = page;
+        }
+
+        public List<String> getImgs() {
+            return imgs;
+        }
+
+        public void setImgs(List<String> imgs) {
+            this.imgs = imgs;
         }
     }
 
