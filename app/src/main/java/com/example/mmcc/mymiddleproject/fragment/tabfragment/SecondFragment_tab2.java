@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.mmcc.mymiddleproject.R;
 import com.example.mmcc.mymiddleproject.activitys.DetailActivity;
+import com.example.mmcc.mymiddleproject.activitys.ImageDetailActivity;
 import com.example.mmcc.mymiddleproject.adapter.FirstFragment_tab1Adapter;
 import com.example.mmcc.mymiddleproject.adapter.FirstFragment_tab2Adapter;
 import com.example.mmcc.mymiddleproject.adapter.ListHeadAdapter;
@@ -197,11 +198,13 @@ public class SecondFragment_tab2 extends Fragment implements IFragmentView, View
 
     @Override
     public void OnLeftClick(String webUrl) {
-        L.e(webUrl);
+        ImageDetailActivity.toImageDetailActivity(getContext(),webUrl);
+
     }
 
     @Override
     public void OnRightClick(String webUrl) {
-        L.e(webUrl);
+        ImageDetailActivity.toImageDetailActivity(getContext(),webUrl);
+
     }
 }

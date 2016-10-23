@@ -14,7 +14,7 @@
         android:id="@+id/lvitem2_leftcard"
         android:layout_width="0dp"
         android:layout_weight="1"
-        android:layout_height="150dp"
+        android:layout_height="wrap_content"
         android:layout_marginRight="8dp"
         app:cardElevation="3dp"
         android:foreground="?android:attr/selectableItemBackground"
@@ -23,13 +23,17 @@
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:orientation="vertical"
-        android:padding="2dp"
+        android:paddingLeft="2dp"
+        android:paddingRight="2dp"
         >
         <ImageView
             android:id="@+id/lvitem2_img1"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginTop="4dp"
             android:src="@mipmap/big_loadpic_full_listpage"
             />
         <TextView
@@ -46,7 +50,7 @@
         android:id="@+id/lvitem2_rightcard"
         android:layout_width="0dp"
         android:layout_weight="1"
-        android:layout_height="150dp"
+        android:layout_height="wrap_content"
         app:cardElevation="3dp"
         android:foreground="?android:attr/selectableItemBackground"
         >
@@ -54,12 +58,16 @@
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:orientation="vertical"
-            android:padding="2dp">
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp">
             <ImageView
                 android:id="@+id/lvitem2_img2"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:layout_marginTop="4dp"
                 android:src="@mipmap/big_loadpic_full_listpage"
                 />
             <TextView

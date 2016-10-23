@@ -29,4 +29,6 @@
     <color name="border_line">#ffd7dadc</color>
     <color name="toppopupbg">#6a64e8</color>
     <color name="endtaskBgColor">#dd4c4c</color>
+
+    <color name="textChecked">#DF6B19</color>
 </resources>
