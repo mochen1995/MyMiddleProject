@@ -19,6 +19,8 @@ import java.net.HttpURLConnection;
 public class SDUtil {
     private static final String picDir = "我的图片收藏";
 
+    private static String curSavePath;
+
     private static String getSdDir() {
         return Environment.getExternalStorageDirectory().getAbsolutePath();
     }
@@ -32,6 +34,7 @@ public class SDUtil {
 
         String path =file.getAbsolutePath()+ File.separator + fileName;
         File pic = new File(path);
+        curSavePath = pic.getAbsolutePath();
         try {
             pic.createNewFile();
         } catch (IOException e) {
@@ -57,5 +60,9 @@ public class SDUtil {
             }
         }
         return true;
+    }
+
+    public static String getPath(){
+        return curSavePath;
     }
 }

@@ -81,7 +81,7 @@ public class ImageDetailAdapter extends PagerAdapter{
                         if (b)
                         {
                            popupWindow.dismiss();
-                            Toast.makeText(mContext,"保存成功",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(mContext,"保存成功:"+SDUtil.getPath(),Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

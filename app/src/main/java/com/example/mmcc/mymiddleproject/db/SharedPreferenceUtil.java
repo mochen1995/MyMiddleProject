@@ -57,10 +57,7 @@ public class SharedPreferenceUtil {
             {
                 return true;
             }
-            Log.i("tag","all key = "+next.getKey());
-            Log.i("tag","```` key = "+key);
         }
-        Log.i("tag","1111111111111111= "+"没有存储的数据");
 
         return false;
     }
