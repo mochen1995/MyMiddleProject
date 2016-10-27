@@ -18,6 +18,8 @@
         android:footerDividersEnabled="false"
         android:headerDividersEnabled="false"
         android:smoothScrollbar="true"
+        android:layoutAnimation="@anim/layout_animation"
+
         app:ptrMode="both"
         />
     <LinearLayout

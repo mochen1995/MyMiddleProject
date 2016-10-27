@@ -76,9 +76,9 @@ public class ThridTabFragment extends BaseFragment implements ThirdFragment_tab3
 
     @Override
     public void OnChecked(int position) {
-       String[] list =  allChildList[position];
+        String[] list =  allChildList[position];
         adapterleft.clear();
-       adapterleft.addAll(list);
+        adapterleft.addAll(list);
     }
 
     @Override

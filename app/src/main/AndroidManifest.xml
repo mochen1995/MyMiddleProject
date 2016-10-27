@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".MyApplication.MyApplication"
@@ -21,7 +22,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".activitys.DetailActivity" />
-        <activity android:name=".activitys.ImageDetailActivity"></activity>
+        <activity android:name=".activitys.ImageDetailActivity" />
+        <activity android:name=".activitys.SaveActivity"></activity>
     </application>
 
 </manifest>

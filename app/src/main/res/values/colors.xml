@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#ef3131</color>
-    <color name="colorPrimaryDark">#ef3131</color>
+    <color name="colorPrimary">#ffffff</color>
+    <color name="colorPrimaryDark">#dadada</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="textColorPrimary">#000</color>
 
     <!--底部tab字体颜色-->
     <color name="tabTextColor_check">#F85959</color>

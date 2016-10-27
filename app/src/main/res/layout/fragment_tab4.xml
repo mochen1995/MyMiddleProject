@@ -66,6 +66,7 @@
             android:paddingRight="10dp"
             />
         <TextView
+            android:id="@+id/fragment_tab4_save"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:drawableLeft="@mipmap/set_icon_favorite"

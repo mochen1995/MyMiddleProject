@@ -28,7 +28,7 @@
                 android:button="@null"
                 android:gravity="center"
                 android:text="精选"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 />
 
             <RadioButton
@@ -39,7 +39,7 @@
                 android:button="@null"
                 android:text="器材"
                 android:alpha="0.6"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
 
                 />
             <RadioButton
@@ -50,7 +50,7 @@
                 android:button="@null"
                 android:text="影像"
                 android:alpha="0.6"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 />
             <RadioButton
                 android:id="@+id/scroll_title_bar_rb4"
@@ -60,7 +60,7 @@
                 android:button="@null"
                 android:text="学院"
                 android:alpha="0.6"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 />
         </RadioGroup>
         <View

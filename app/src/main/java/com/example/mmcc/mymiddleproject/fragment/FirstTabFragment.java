@@ -3,7 +3,6 @@ package com.example.mmcc.mymiddleproject.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,10 +15,7 @@ import android.widget.RadioGroup;
 import com.example.mmcc.mymiddleproject.R;
 import com.example.mmcc.mymiddleproject.adapter.MyFragmentPagerAdapter;
 import com.example.mmcc.mymiddleproject.fragment.tabfragment.*;
-import com.example.mmcc.mymiddleproject.presenter.FragmentPresenter;
-import com.example.mmcc.mymiddleproject.url.MyUrl;
 import com.example.mmcc.mymiddleproject.util.ScreenUtil;
-import com.example.mmcc.mymiddleproject.view.IFragmentView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,9 +23,6 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-/**
- * Created by Administrator on 16-10-20.
- */
 
 public class FirstTabFragment extends BaseFragment implements ViewPager.OnPageChangeListener, RadioGroup.OnCheckedChangeListener {
 
@@ -49,19 +42,13 @@ public class FirstTabFragment extends BaseFragment implements ViewPager.OnPageCh
     HorizontalScrollView scrollView;
     @Bind(R.id.fragment_tab1_vp)
     ViewPager fragmentTab1Vp;
-    private View mView;
 
     private int ScreenWidth;
-
-
-    private List<Fragment> fragments;
-    private FragmentPresenter presenter;
-    private int currentPage=1;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.fragment_tab1, container, false);
+        View mView = inflater.inflate(R.layout.fragment_tab1, container, false);
         ButterKnife.bind(this, mView);
         initView();
 
@@ -70,7 +57,7 @@ public class FirstTabFragment extends BaseFragment implements ViewPager.OnPageCh
 
     private void initView() {
         initScrollbar(); //初始化顶部滑动条
-        fragments = new ArrayList<>();
+        List<Fragment> fragments = new ArrayList<>();
         fragments.add(new FirstFragment_tab1());
         fragments.add(new FirstFragment_tab2());
         fragments.add(new FirstFragment_tab3());
@@ -86,7 +73,7 @@ public class FirstTabFragment extends BaseFragment implements ViewPager.OnPageCh
     private void initScrollbar() {
         ScreenWidth = ScreenUtil.getScreenWidth(getContext());
         int childCount = rg.getChildCount();
-        RadioButton rb = null;
+        RadioButton rb;
         for (int i = 0; i < childCount; i++) {
             rb = (RadioButton) rg.getChildAt(i);
             rb.getLayoutParams().width = ScreenWidth / 4;
@@ -130,7 +117,7 @@ public class FirstTabFragment extends BaseFragment implements ViewPager.OnPageCh
 
     private void initScrollbarTextColor() {
         int childCount = rg.getChildCount();
-        RadioButton rb = null;
+        RadioButton rb;
         for (int i = 0; i < childCount; i++) {
             rb = (RadioButton) rg.getChildAt(i);
             rb.setAlpha(0.6f);

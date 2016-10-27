@@ -14,7 +14,6 @@ import com.example.mmcc.mymiddleproject.fragment.FirstTabFragment;
 import com.example.mmcc.mymiddleproject.fragment.ForthTabFragment;
 import com.example.mmcc.mymiddleproject.fragment.SecondTabFragment;
 import com.example.mmcc.mymiddleproject.fragment.ThridTabFragment;
-import com.example.mmcc.mymiddleproject.presenter.MainPresenter;
 import com.example.mmcc.mymiddleproject.view.IMainView;
 
 import butterknife.Bind;
@@ -34,17 +33,19 @@ public class MainActivity extends BaseActivity implements IMainView, RadioGroup.
     RadioButton rb3;
     @Bind(R.id.activity_main_rb4)
     RadioButton rb4;
-    private MainPresenter mainPresenter;
     private FragmentManager fragmentManager;
 
     private Fragment currentFragment;
     private Fragment firstTabFragment,secondTabFragment,thridTabFragment,forthTabFragment;
+    private RadioButton curRb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mainPresenter = new MainPresenter(this, this);
         rg.setOnCheckedChangeListener(this);
+        rb1.animate().scaleX(1.3f).scaleY(1.3f).translationY(-20)
+                .setDuration(500).start();
+        curRb = rb1;
         initFragment();
     }
 
@@ -88,24 +89,27 @@ public class MainActivity extends BaseActivity implements IMainView, RadioGroup.
         transaction.hide(currentFragment);
         switch (checkedId) {
             case R.id.activity_main_rb1:
-
+                animation(rb1);
                 rb1.setTextColor(ContextCompat.getColor(this,R.color.tabTextColor_check));
                 transaction.show(firstTabFragment);
                 currentFragment = firstTabFragment;
                 break;
             case R.id.activity_main_rb2:
+                animation(rb2);
                 rb2.setTextColor(ContextCompat.getColor(this,R.color.tabTextColor_check));
                 //transaction.replace(R.id.activity_main_framelayout,new SecondTabFragment());
                 transaction.show(secondTabFragment);
                 currentFragment = secondTabFragment;
                 break;
             case R.id.activity_main_rb3:
+                animation(rb3);
                 rb3.setTextColor(ContextCompat.getColor(this,R.color.tabTextColor_check));
                // transaction.replace(R.id.activity_main_framelayout,new ThridTabFragment());
                 transaction.show(thridTabFragment);
                 currentFragment = thridTabFragment;
                 break;
             case R.id.activity_main_rb4:
+                animation(rb4);
                 rb4.setTextColor(ContextCompat.getColor(this,R.color.tabTextColor_check));
                // transaction.replace(R.id.activity_main_framelayout,new ForthTabFragment());
                 transaction.show(forthTabFragment);
@@ -113,6 +117,17 @@ public class MainActivity extends BaseActivity implements IMainView, RadioGroup.
                 break;
         }
         transaction.commit();
+    }
+
+    private void animation(RadioButton rb) {
+        curRb.animate().scaleX(1).scaleY(1).translationY(0)
+                .setDuration(500).start(); //恢复上一次动画
+
+        rb.animate().scaleX(1.3f).scaleY(1.3f).translationY(-20)
+                .setDuration(500).start();
+        curRb = rb;
+
+
     }
 
     private void initRadioTextColor() {
